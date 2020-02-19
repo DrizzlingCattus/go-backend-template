@@ -13,7 +13,8 @@ import (
 var db *gorm.DB
 
 type Cat struct {
-	// struct embedded를 살펴볼 것
+	// type embedded
+	// Cat은 gorm.Model에 있는 모든 method 활용 가능
 	gorm.Model
 	Name string `gorm:"default:'default-cat'" json:"name"`
 	Type string `gorm:"default:'default-type'" json:"type"`
@@ -21,6 +22,7 @@ type Cat struct {
 
 func GetCats(c echo.Context) error {
 	var cats []Cat
+	// slice로 얻어올 수 있음
 	db.Find(&cats)
 
 	catMaps := make(map[int]map[string]string)
